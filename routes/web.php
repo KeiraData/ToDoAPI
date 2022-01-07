@@ -13,6 +13,16 @@
 |
 */
 
-$router->get('/', function () use ($router) {
+$router->get('/', function() use ($router)
+{
     return $router->app->version();
+});
+
+$router->group(['prefix' => 'api'], function() use ($router)
+{
+    $router->get('todos', ['uses' => 'ToDoController@getAll']);
+
+    $router->post('todos', ['uses' => 'ToDoController@create']);
+
+    $router->post('todos/{id}', ['uses' => 'ToDoController@update']);
 });
